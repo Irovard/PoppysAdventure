@@ -3,12 +3,32 @@ import { Camera } from './camera.js';
 import { tileTypes, tileMap } from './tiledata.js';
 import { Renderer } from './renderer.js';
 
+const TILE_SIZE = 64;
+
+// Function to adjust visible field based on window size
+function adjustVisibleField() {
+  let VISIBLE_TILES_X = Math.floor(window.innerWidth / TILE_SIZE);
+  let VISIBLE_TILES_Y = Math.floor(window.innerHeight / TILE_SIZE);
+  canvas.width = VISIBLE_TILES_X * TILE_SIZE;
+  canvas.height = VISIBLE_TILES_Y * TILE_SIZE;
+}
+
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
-const TILE_SIZE = 64;
 
 // Keep graphics pixelated
 ctx.imageSmoothingEnabled = false;
+
+// Adjust on load and resize
+adjustVisibleField();
+window.addEventListener('resize', () => {
+  adjustVisibleField();
+  ctx.imageSmoothingEnabled = false; // Re-apply after resize
+  if (window.gameInstance) {
+    window.gameInstance.camera.width = canvas.width;
+    window.gameInstance.camera.height = canvas.height;
+  }
+});
 
 class Game {
   constructor(ctx) {
@@ -42,4 +62,4 @@ class Game {
   }
 }
 
-new Game(ctx);
+window.gameInstance = new Game(ctx);
