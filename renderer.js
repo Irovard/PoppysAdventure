@@ -7,10 +7,15 @@ export class Renderer {
 
     // Keep graphics pixelated
     this.ctx.imageSmoothingEnabled = false;
+
+    // Load player image once
+    this.playerImage = new Image();
+    this.playerImage.src = "./tiles/player.png"; // Path to player image
   }
 
   draw(tileMap, TILE_SIZE) {
     const cam = this.camera.getView(this.player, TILE_SIZE);
+    // Map tiles
     for (let y = 0; y < tileMap.length; y++) {
       for (let x = 0; x < tileMap[y].length; x++) {
         const tileKey = tileMap[y][x];
@@ -26,13 +31,15 @@ export class Renderer {
         }
       }
     }
-    // Player
-    this.ctx.fillStyle = '#e74c3c';
-    this.ctx.fillRect(
-      this.player.x * TILE_SIZE - cam.x,
-      this.player.y * TILE_SIZE - cam.y,
-      TILE_SIZE,
-      TILE_SIZE
-    );
+    // Player (draw PNG with transparency)
+    if (this.playerImage.complete && this.playerImage.naturalWidth !== 0) {
+      this.ctx.drawImage(
+        this.playerImage,
+        this.player.x * TILE_SIZE - cam.x,
+        this.player.y * TILE_SIZE - cam.y,
+        TILE_SIZE,
+        TILE_SIZE
+      );
+    }
   }
 }
