@@ -4,10 +4,10 @@ export class Camera {
     this.viewHeight = viewHeight;
   }
 
-  getView(player) {
+  getView(player, tileSize) {
     return {
-      x: player.x * 32 - this.viewWidth / 2 + 16,
-      y: player.y * 32 - this.viewHeight / 2 + 16
+      x: player.x * tileSize - this.viewWidth / 2,
+      y: player.y * tileSize - this.viewHeight / 2
     };
   }
 }

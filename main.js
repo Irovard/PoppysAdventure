@@ -1,10 +1,14 @@
 import { Movement } from './movement.js';
 import { Camera } from './camera.js';
 import { tileTypes, tileMap } from './tiledata.js';
+import { Renderer } from './renderer.js';
 
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
-const TILE_SIZE = 16;
+const TILE_SIZE = 64;
+
+// Keep graphics pixelated
+ctx.imageSmoothingEnabled = false;
 
 class Game {
   constructor(ctx) {
@@ -15,6 +19,7 @@ class Game {
     this.tiles = {};
     this.initTiles();
     this.initInput();
+    this.renderer = new Renderer(this.ctx, this.tiles, this.camera, this.player); // Use Renderer
     this.loop();
   }
 
@@ -30,37 +35,10 @@ class Game {
     window.addEventListener('keydown', (e) => this.movement.handleInput(e));
   }
 
-  draw() {
-    const cam = this.camera.getView(this.player);
-    for (let y = 0; y < tileMap.length; y++) {
-      for (let x = 0; x < tileMap[y].length; x++) {
-        const tileKey = tileMap[y][x];
-        const tileImage = this.tiles[tileKey];
-        if (tileImage) {
-          this.ctx.drawImage(
-            tileImage,
-            x * TILE_SIZE - cam.x,
-            y * TILE_SIZE - cam.y,
-            TILE_SIZE,
-            TILE_SIZE
-          );
-        }
-      }
-    }
-    // Player
-    this.ctx.fillStyle = '#e74c3c';
-    this.ctx.fillRect(
-      this.player.x * TILE_SIZE - cam.x,
-      this.player.y * TILE_SIZE - cam.y,
-      TILE_SIZE,
-      TILE_SIZE
-    );
-  }
-
   loop() {
     requestAnimationFrame(() => this.loop());
     this.ctx.clearRect(0, 0, canvas.width, canvas.height);
-    this.draw();
+    this.renderer.draw(tileMap, TILE_SIZE); // Use Renderer
   }
 }
 
