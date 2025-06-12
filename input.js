@@ -1,6 +1,11 @@
-export class Movement {
+export class Input {
   constructor(player) {
+    this.initInput();
     this.player = player;
+  }
+
+  initInput() {
+    window.addEventListener('keydown', (e) => this.handleInput(e));
   }
 
   handleInput(e) {

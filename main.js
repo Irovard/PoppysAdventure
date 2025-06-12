@@ -1,6 +1,6 @@
-import { Movement } from './movement.js';
+import { Input } from './input.js';
 import { Camera } from './camera.js';
-import { tileTypes, tileMap } from './tiledata.js';
+import { tileTypes, tileMap, initTiles } from './tiledata.js';
 import { Renderer } from './renderer.js';
 import { Player } from './player.js';
 
@@ -8,48 +8,33 @@ const TILE_SIZE = 64;
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
-// Function to adjust visible field based on window size
-function adjustVisibleField() {
-  let VISIBLE_TILES_X = Math.floor(window.innerWidth / TILE_SIZE);
-  let VISIBLE_TILES_Y = Math.floor(window.innerHeight / TILE_SIZE);
-  canvas.width = VISIBLE_TILES_X * TILE_SIZE;
-  canvas.height = VISIBLE_TILES_Y * TILE_SIZE;
-}
-
-// Adjust on load and resize
-adjustVisibleField();
-window.addEventListener('resize', () => {
-  adjustVisibleField();
-  ctx.imageSmoothingEnabled = false; // Re-apply after resize
-  if (window.gameInstance) {
-    window.gameInstance.camera.width = canvas.width;
-    window.gameInstance.camera.height = canvas.height;
-  }
-});
-
 class Game {
   constructor(ctx) {
     this.ctx = ctx;
-    this.player = new Player(5, 5);
-    this.movement = new Movement(this.player);
+    this.player = new Player(15,15);
+    this.input = new Input(this.player);
     this.camera = new Camera(canvas.width, canvas.height);
-    this.tiles = {};
-    this.initTiles();
-    this.initInput();
+    this.tiles = initTiles();
     this.renderer = new Renderer(this.ctx, this.tiles, this.camera, this.player);
+
+    this.adjustVisibleField();
+    window.addEventListener('resize', () => this.onResize());
+
     this.loop();
   }
 
-  initTiles() {
-    for (const [key, path] of Object.entries(tileTypes)) {
-      const img = new Image();
-      img.src = path;
-      this.tiles[key] = img;
-    }
+  adjustVisibleField() {
+    let VISIBLE_TILES_X = Math.floor(window.innerWidth / TILE_SIZE);
+    let VISIBLE_TILES_Y = Math.floor(window.innerHeight / TILE_SIZE);
+    canvas.width = VISIBLE_TILES_X * TILE_SIZE;
+    canvas.height = VISIBLE_TILES_Y * TILE_SIZE;
+    this.camera.width = canvas.width;
+    this.camera.height = canvas.height;
+    this.ctx.imageSmoothingEnabled = false;
   }
 
-  initInput() {
-    window.addEventListener('keydown', (e) => this.movement.handleInput(e));
+  onResize() {
+    this.adjustVisibleField();
   }
 
   loop() {

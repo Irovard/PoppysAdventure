@@ -23,3 +23,13 @@ export const tileMap = [
   [1, 4, 2, 4, 2, 1, 1, 1, 1, 2, 2, 2, 2, 1, 4, 4],
   [1, 4, 2, 4, 2, 2, 2, 2, 2, 2, 3, 2, 2, 1, 4, 4]
 ];
+
+export function initTiles() {
+  const tiles = {};
+  for (const [key, path] of Object.entries(tileTypes)) {
+    const img = new Image();
+    img.src = path;
+    tiles[key] = img;
+  }
+  return tiles;
+}

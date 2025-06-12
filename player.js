@@ -2,6 +2,8 @@ export class Player {
   constructor(x = 0, y = 0) {
     this.x = x;
     this.y = y;
+    this.img = new Image();
+    this.img.src = "./tiles/player.png"; // Path to player image
   }
 
   setPosition(x, y) {

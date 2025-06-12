@@ -7,15 +7,15 @@ export class Renderer {
 
     // Keep graphics pixelated
     this.ctx.imageSmoothingEnabled = false;
-
-    // Load player image once
-    this.playerImage = new Image();
-    this.playerImage.src = "./tiles/player.png"; // Path to player image
   }
 
-  draw(tileMap, TILE_SIZE) {
-    const cam = this.camera.getView(this.player, TILE_SIZE);
-    // Map tiles
+  draw(tileMap, tileSize) {
+    const cam = this.camera.getView(this.player, tileSize);
+    this.drawMap(tileMap, tileSize, cam);
+    this.drawPlayers(tileSize, cam);
+  }
+
+  drawMap(tileMap, tileSize, cam) {
     for (let y = 0; y < tileMap.length; y++) {
       for (let x = 0; x < tileMap[y].length; x++) {
         const tileKey = tileMap[y][x];
@@ -23,22 +23,25 @@ export class Renderer {
         if (tileImage) {
           this.ctx.drawImage(
             tileImage,
-            x * TILE_SIZE - cam.x,
-            y * TILE_SIZE - cam.y,
-            TILE_SIZE,
-            TILE_SIZE
+            x * tileSize - cam.x,
+            y * tileSize - cam.y,
+            tileSize,
+            tileSize
           );
         }
       }
     }
+  }
+
+  drawPlayers(tileSize, cam) {
     // Player (draw PNG with transparency)
-    if (this.playerImage.complete && this.playerImage.naturalWidth !== 0) {
+    if (this.player.img.complete && this.player.img.naturalWidth !== 0) {
       this.ctx.drawImage(
-        this.playerImage,
-        this.player.x * TILE_SIZE - cam.x,
-        this.player.y * TILE_SIZE - cam.y,
-        TILE_SIZE,
-        TILE_SIZE
+        this.player.img,
+        this.player.x * tileSize - cam.x,
+        this.player.y * tileSize - cam.y,
+        tileSize,
+        tileSize
       );
     }
   }
