@@ -1,6 +1,6 @@
 import { Input } from './input.js';
 import { Camera } from './camera.js';
-import { tileTypes, tileMap, initTiles } from './tiledata.js';
+import { tileMap, initTiles } from './tiledata.js';
 import { Renderer } from './renderer.js';
 import { Player } from './player.js';
 

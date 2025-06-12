@@ -1,10 +1,14 @@
 export const tileTypes = {
-  0: './tiles/void.png',
-  1: './tiles/dirt.png',
-  2: './tiles/wall.png',
-  3: './tiles/water.png',
-  4: './tiles/grass.png',
-  5: './tiles/grass2.png',
+  0: 'void.png',
+  1: 'dirt.png',
+  2: 'wall.png',
+  3: 'water.png',
+  4: 'grass.png',
+  5: 'grass2.png',
+  6: 'dark_grass.png',
+  7: 'stone.png',
+  8: 'stone_bricks.png',
+  9: 'sand.png',
 };
 
 export const tileMap = [
@@ -30,7 +34,7 @@ export function initTiles() {
   const tiles = {};
   for (const [key, path] of Object.entries(tileTypes)) {
     const img = new Image();
-    img.src = path;
+    img.src = `./assets/tiles/${path}`;
     tiles[key] = img;
   }
   return tiles;

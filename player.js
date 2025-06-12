@@ -3,7 +3,7 @@ export class Player {
     this.x = x;
     this.y = y;
     this.img = new Image();
-    this.img.src = "./tiles/player.png"; // Path to player image
+    this.img.src = "./assets/skins/player.png"; // Path to player image
   }
 
   setPosition(x, y) {
