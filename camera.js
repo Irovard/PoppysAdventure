@@ -6,8 +6,8 @@ export class Camera {
 
   getView(player, tileSize) {
     return {
-      x: player.x * tileSize - this.viewWidth / 2,
-      y: player.y * tileSize - this.viewHeight / 2
+      x: player.x * tileSize - this.viewWidth,
+      y: player.y * tileSize - this.viewHeight/2
     };
   }
 }

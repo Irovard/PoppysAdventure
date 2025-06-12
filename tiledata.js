@@ -1,8 +1,10 @@
 export const tileTypes = {
+  0: './tiles/void.png',
   1: './tiles/dirt.png',
   2: './tiles/wall.png',
   3: './tiles/water.png',
-  4: './tiles/grass.png'
+  4: './tiles/grass.png',
+  5: './tiles/grass2.png',
 };
 
 export const tileMap = [
