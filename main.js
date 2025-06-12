@@ -11,7 +11,7 @@ const ctx = canvas.getContext('2d');
 class Game {
   constructor(ctx) {
     this.ctx = ctx;
-    this.player = new Player(0, 0, tileMap[0].length, tileMap.length);
+    this.player = new Player(2, 60, tileMap[0].length, tileMap.length); // 2,1
     this.input = new Input(this.player);
     this.camera = new Camera(canvas.width, canvas.height);
     this.tiles = initTiles();
