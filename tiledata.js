@@ -1,3 +1,5 @@
+import { map } from './map.js';
+
 export const tileTypes = {
   0: 'void.png',
   1: 'dirt.png',
@@ -11,24 +13,8 @@ export const tileTypes = {
   9: 'sand.png',
 };
 
-export const tileMap = [
-  [1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1],
-  [1, 4, 4, 4, 2, 1, 1, 1, 1, 1, 2, 3, 2, 1, 4, 4],
-  [1, 4, 2, 4, 2, 1, 1, 1, 1, 1, 2, 2, 2, 1, 4, 4],
-  [1, 4, 2, 4, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 4],
-  [1, 4, 2, 4, 2, 1, 1, 1, 1, 2, 2, 2, 2, 1, 4, 4],
-  [1, 4, 2, 4, 2, 2, 2, 2, 2, 2, 3, 2, 2, 1, 4, 4],
-  [1, 4, 2, 4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 1, 4, 4],
-  [1, 4, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 1, 4, 4],
-  [1, 4, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 1, 4, 4],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1],
-  [1, 4, 4, 4, 2, 1, 1, 1, 1, 1, 2, 3, 2, 1, 4, 4],
-  [1, 4, 2, 4, 2, 1, 1, 1, 1, 1, 2, 2, 2, 1, 4, 4],
-  [1, 4, 2, 4, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 4],
-  [1, 4, 2, 4, 2, 1, 1, 1, 1, 2, 2, 2, 2, 1, 4, 4],
-  [1, 4, 2, 4, 2, 2, 2, 2, 2, 2, 3, 2, 2, 1, 4, 4]
-];
+// Tile types are mapped to this 2D array.
+export const tileMap = map;
 
 export function initTiles() {
   const tiles = {};
@@ -38,4 +24,10 @@ export function initTiles() {
     tiles[key] = img;
   }
   return tiles;
+}
+
+export function isBlocked(x, y) {
+  const blockedTiles = [0, 2, 3, 8]; // Example blocked tiles
+  const tile = tileMap[y] && tileMap[y][x];
+  return blockedTiles.includes(tile);
 }

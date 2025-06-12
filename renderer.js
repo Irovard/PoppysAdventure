@@ -16,8 +16,19 @@ export class Renderer {
   }
 
   drawMap(tileMap, tileSize, cam) {
-    for (let y = 0; y < tileMap.length; y++) {
-      for (let x = 0; x < tileMap[y].length; x++) {
+    const cols = tileMap[0].length;
+    const rows = tileMap.length;
+    const canvasWidth = this.ctx.canvas.width;
+    const canvasHeight = this.ctx.canvas.height;
+
+    // Calculate visible tile range
+    const startX = Math.max(0, Math.floor(cam.x / tileSize));
+    const endX = Math.min(cols, Math.ceil((cam.x + canvasWidth) / tileSize));
+    const startY = Math.max(0, Math.floor(cam.y / tileSize));
+    const endY = Math.min(rows, Math.ceil((cam.y + canvasHeight) / tileSize));
+
+    for (let y = startY; y < endY; y++) {
+      for (let x = startX; x < endX; x++) {
         const tileKey = tileMap[y][x];
         const tileImage = this.tiles[tileKey];
         if (tileImage) {
