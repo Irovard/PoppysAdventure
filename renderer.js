@@ -12,7 +12,11 @@ export class Renderer {
   draw(tileMap, tileSize) {
     const cam = this.camera.getView(this.player, tileSize);
     this.drawMap(tileMap, tileSize, cam);
-    this.drawPlayers(tileSize, cam);
+    const overDraw = [16]; // Tiles that can are drawn above the player
+    // If the player position is not with the tile map on a number in overDraw continue
+    if (!overDraw.includes(tileMap[this.player.y][this.player.x])) {
+      this.drawPlayers(tileSize, cam);
+    }
   }
 
   drawMap(tileMap, tileSize, cam) {
@@ -26,6 +30,8 @@ export class Renderer {
     const endX = Math.min(cols, Math.ceil((cam.x + canvasWidth) / tileSize));
     const startY = Math.max(0, Math.floor(cam.y / tileSize));
     const endY = Math.min(rows, Math.ceil((cam.y + canvasHeight) / tileSize));
+
+    const overDraw = [16]; // Tiles that can are drawn above the player
 
     for (let y = startY; y < endY; y++) {
       for (let x = startX; x < endX; x++) {

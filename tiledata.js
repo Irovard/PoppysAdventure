@@ -17,6 +17,9 @@ export const tileTypes = {
   13: 'log.png',
   14: 'snow.png',
   15: 'ice.png',
+  16: 'tree.png',
+  17: 'bookshelf.png',
+  18: 'fire_place.png',
 };
 
 // Tile types are mapped to this 2D array.
@@ -33,7 +36,7 @@ export function initTiles() {
 }
 
 export function isBlocked(x, y) {
-  const blockedTiles = [0, 2, 3, 9, 13]; // Example blocked tiles
+  const blockedTiles = [0, 2, 3, 9, 13, 17, 18]; // Blocked tiles
   const tile = tileMap[y] && tileMap[y][x];
   return blockedTiles.includes(tile);
 }
