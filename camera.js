@@ -1,7 +1,7 @@
 export class Camera {
-  constructor(viewWidth, viewHeight) {
-    this.viewWidth = window.innerWidth;//viewWidth;
-    this.viewHeight = window.innerHeight;//viewHeight;
+  constructor() {
+    this.viewWidth = window.innerWidth;
+    this.viewHeight = window.innerHeight;
   }
 
   getView(player, tileSize) {

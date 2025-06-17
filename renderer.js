@@ -1,9 +1,11 @@
 export class Renderer {
-  constructor(ctx, tiles, camera, player) {
+  constructor(ctx, tiles, camera, player, npcHandler) {
     this.ctx = ctx;
     this.tiles = tiles;
     this.camera = camera;
     this.player = player;
+    this.npcHandler = npcHandler;
+
 
     // Keep graphics pixelated
     this.ctx.imageSmoothingEnabled = false;
@@ -13,10 +15,10 @@ export class Renderer {
     const cam = this.camera.getView(this.player, tileSize);
     this.drawMap(tileMap, tileSize, cam);
     const overDraw = [16]; // Tiles that can are drawn above the player
-    // If the player position is not with the tile map on a number in overDraw continue
     if (!overDraw.includes(tileMap[this.player.y][this.player.x])) {
       this.drawPlayers(tileSize, cam);
     }
+    this.drawNPCs(tileSize, cam);
   }
 
   drawMap(tileMap, tileSize, cam) {
@@ -30,8 +32,6 @@ export class Renderer {
     const endX = Math.min(cols, Math.ceil((cam.x + canvasWidth) / tileSize));
     const startY = Math.max(0, Math.floor(cam.y / tileSize));
     const endY = Math.min(rows, Math.ceil((cam.y + canvasHeight) / tileSize));
-
-    const overDraw = [16]; // Tiles that can are drawn above the player
 
     for (let y = startY; y < endY; y++) {
       for (let x = startX; x < endX; x++) {
@@ -62,4 +62,18 @@ export class Renderer {
       );
     }
   }
+
+    drawNPCs(tileSize, cam) {
+      for (const npc of Object.values(this.npcHandler.npcs)) {
+        if (npc.img && npc.img.complete && npc.img.naturalWidth !== 0) {
+          this.ctx.drawImage(
+            npc.img,
+            npc.position.x * tileSize - cam.x,
+            npc.position.y * tileSize - cam.y,
+            tileSize,
+            tileSize
+          );
+        }
+      }
+    }
 }

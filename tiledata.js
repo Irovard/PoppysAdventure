@@ -23,7 +23,9 @@ export const tileTypes = {
 };
 
 // Tile types are mapped to this 2D array.
-export const tileMap = map;
+export function tileMap() {
+  return map;
+}
 
 export function initTiles() {
   const tiles = {};
@@ -35,8 +37,8 @@ export function initTiles() {
   return tiles;
 }
 
-export function isBlocked(x, y) {
-  const blockedTiles = [0, 2, 3, 9, 13, 17, 18]; // Blocked tiles
+export function onIce(x, y) {
+  const iceTiles = [14, 15]; // Cold tiles
   const tile = tileMap[y] && tileMap[y][x];
-  return blockedTiles.includes(tile);
+  return iceTiles.includes(tile);
 }

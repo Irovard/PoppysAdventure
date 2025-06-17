@@ -3,6 +3,7 @@ import { Camera } from './camera.js';
 import { tileMap, initTiles } from './tiledata.js';
 import { Renderer } from './renderer.js';
 import { Player } from './player.js';
+import { NPCHandler } from './npc_handler.js';
 
 const TILE_SIZE = 64;
 const canvas = document.getElementById('gameCanvas');
@@ -11,14 +12,19 @@ const ctx = canvas.getContext('2d');
 class Game {
   constructor(ctx) {
     this.ctx = ctx;
-    this.player = new Player(2, 1, tileMap[0].length, tileMap.length); // 2,1
-    this.input = new Input(this.player);
-    this.camera = new Camera(canvas.width, canvas.height);
+    this.tileMap = tileMap();
+    this.npcHandler = new NPCHandler();
+    this.player = new Player(this.tileMap, this.npcHandler);
+    this.input = new Input(this.player, this.npcHandler);
+    this.camera = new Camera();
     this.tiles = initTiles();
-    this.renderer = new Renderer(this.ctx, this.tiles, this.camera, this.player);
+    this.renderer = new Renderer(this.ctx, this.tiles, this.camera, this.player, this.npcHandler);
 
     this.adjustVisibleField();
     window.addEventListener('resize', () => this.onResize());
+
+    this.bridge = false;
+    this.door = false;
 
     this.loop();
   }
@@ -40,7 +46,23 @@ class Game {
   loop() {
     requestAnimationFrame(() => this.loop());
     this.ctx.clearRect(0, 0, canvas.width, canvas.height);
-    this.renderer.draw(tileMap, TILE_SIZE);
+    this.renderer.draw(this.tileMap, TILE_SIZE);
+    this.player.runPlayer();
+
+    if (!this.bridge && this.npcHandler.inventory.includes('Love')) {
+      // Set pixel in tileMap to indicate bridge is built
+      this.tileMap[32][30] = 12;
+      this.tileMap[31][29] = 12;
+      this.bridge = true;
+    }
+
+    if (!this.door && this.npcHandler.inventory.includes('Key')) {
+      this.tileMap[131][105] = 8;
+      this.tileMap[132][104] = 8;
+      this.tileMap[133][103] = 8;
+      this.door = true;
+    }
+
   }
 }
 
