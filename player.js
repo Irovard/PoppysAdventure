@@ -2,7 +2,7 @@ import { onIce } from './tiledata.js';
 
 export class Player {
   constructor(map, npcHandler) {
-    this.startingPosition = { x: 40, y: 50 }; // Default starting position 2,1
+    this.startingPosition = { x: 2, y: 1 }; // Default starting position 2,1
     this.tileMap = map;
     this.x = this.startingPosition.x;
     this.y = this.startingPosition.y;
@@ -14,6 +14,8 @@ export class Player {
 
     this.maxFreeze = 200; // Maximum freeze time
     this.freeze = this.maxFreeze;
+    this.snowflakeImg = new Image();
+    this.snowflakeImg.src = "./assets/skins/snowflake.png";
   }
 
   freezePlayer() {
@@ -31,6 +33,42 @@ export class Player {
     if (this.freeze < this.maxFreeze) {
       this.freeze++;
     }
+  }
+
+  drawFreezeIndicator(ctx, canvas) {
+    if (this.freeze === this.maxFreeze) return;
+
+    const snowflakes = Math.ceil((this.freeze / this.maxFreeze) * 5);
+    const size = 32; // Size of each snowflake icon
+    const padding = 8; // Space between icons
+    const y = canvas.height - size - 10; // 10px from bottom
+    console.log(`Drawing ${snowflakes} snowflakes for freeze indicator.`);
+
+    for (let i = 0; i < snowflakes; i++) {
+      ctx.drawImage(
+        this.snowflakeImg,
+        10 + i * (size + padding), // 10px from left, then spaced
+        y,
+        size,
+        size
+      );
+    }
+
+    console.log(`Freeze indicator drawn with ${snowflakes} snowflakes.`);
+  }
+
+  runPlayer(ctx, canvas) {
+    if (onIce(this.x, this.y)) {
+      this.freezePlayer();
+    }
+    else {
+      this.unfreezePlayer();
+    }
+    console.log(`Player position: (${this.x}, ${this.y}), Freeze: ${this.freeze}`);
+    this.drawFreezeIndicator(ctx, canvas);
+
+    
+
   }
 
   setPosition(x, y) {
@@ -57,16 +95,5 @@ export class Player {
       this.x = newX;
       this.y = newY;
     }
-  }
-
-  runPlayer() {
-
-    if (onIce(this.x, this.y)) {
-      this.freezePlayer();
-    }
-    else {
-      this.unfreezePlayer();
-    }
-
   }
 }

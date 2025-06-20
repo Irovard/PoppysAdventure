@@ -39,6 +39,7 @@ export function initTiles() {
 
 export function onIce(x, y) {
   const iceTiles = [14, 15]; // Cold tiles
-  const tile = tileMap[y] && tileMap[y][x];
+  const map = tileMap();
+  const tile = map[y] && map[y][x];
   return iceTiles.includes(tile);
 }

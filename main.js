@@ -47,7 +47,7 @@ class Game {
     requestAnimationFrame(() => this.loop());
     this.ctx.clearRect(0, 0, canvas.width, canvas.height);
     this.renderer.draw(this.tileMap, TILE_SIZE);
-    this.player.runPlayer();
+    this.player.runPlayer(this.ctx, canvas);
 
     if (!this.bridge && this.npcHandler.inventory.includes('Love')) {
       // Set pixel in tileMap to indicate bridge is built
