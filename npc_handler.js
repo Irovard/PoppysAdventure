@@ -39,7 +39,6 @@ export class NPCHandler {
       const npc = this.npcs[name];
       if (npc) {
         npc.nextStage();
-        console.log(`NPC ${name} staged up to ${npc.stage}`);
       }
     }
   }

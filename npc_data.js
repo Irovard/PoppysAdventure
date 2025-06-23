@@ -172,7 +172,7 @@ export class NPCData {
         action: [() => {say(duo1); this.npcHandler.stageUpNPCs(["duo"])},
                 () => {say(duo2); this.npcHandler.stageUpNPCs(["finley", "duo"])},
                 () => say(duo2),
-                () => {say("Yayy gracias! You found the plan!\nNow we can get back to work and send the letters to their destinations.\nThank you so much!"); this.npcHandler.addBamboo(); this.npcHandler.stageUpNPCs(["duo", "trader", "map", "finley"]);},
+                () => {say("Yayy gracias! You found the plan!\nNow we can get back to work and send the letters to their destinations.\nThank you so much! Here a bamboo!"); this.npcHandler.addBamboo(); this.npcHandler.stageUpNPCs(["duo", "trader", "map", "finley"]);},
                 () => say("Du-dum! Do your duolingo lessons!"),
         ],
         position: { x: 144, y: 5 }
@@ -191,7 +191,7 @@ export class NPCData {
         name: 'carte',
         stage: 0,
         action: [() => say("There is a map."),
-                () => {say("You found the map! Bring it to the poststation."); this.npcHandler.addToInventory("Map"); this.npcHandler.stageUpNPCs(["duo"])},
+                () => {say("You found the map! Bring it to the poststation."); this.npcHandler.addToInventory("Map"); this.npcHandler.stageUpNPCs(["duo", "carte"])},
                 () => say("The map is safe."),
         ],
         position: { x: 12, y: 142 }
@@ -205,7 +205,7 @@ export class NPCData {
                 () => {say("Fwaeh, seeyuh, I AM MUSIC, Swamp- s- s- s- s- swamp ISSO,\nyeaaahh, huh huh, homicidee homicidee"); this.npcHandler.stageUpNPCs(["carti"])},
                 () => {say("Here ya go, bring it back to my homie."); this.npcHandler.addToInventory("MUSICVocals"); this.npcHandler.stageUpNPCs(["carti", "cat"])},
                 () => say("Here ya go, bring it back to my homie."),
-                () => {say("DIS 1 GOT IT! Thank you homie. Finally I can drop, SORRY 4 DA WAIT."); this.npcHandler.addBamboo(); this.npcHandler.stageUpNPCs(["carti", "red", "cat"])},
+                () => {say("DIS 1 GOT IT! Thank you homie. Finally I can drop, SORRY 4 DA WAIT. Here ya go wit a bamboo."); this.npcHandler.addBamboo(); this.npcHandler.stageUpNPCs(["carti", "red", "cat"])},
                 () => say("You som' FINE SHIT bae")
         ],
         position: { x: 7, y: 83 }
