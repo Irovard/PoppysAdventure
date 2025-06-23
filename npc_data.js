@@ -44,7 +44,7 @@ function say(message) {
 // Text for NPCs //
 ///////////////////
 
-const press_space1 = "Guide\n----------\nPress SPACE to interact with NPCs and go through their dialogue.\nIf you want to leave the dialogue, just move away from the NPC.\nUse arrow keys or WASD to move around.\nI love you my baby <3\nHave fun playing!";
+const press_space1 = "Guide\n----------\nPress SPACE to interact with NPCs and go through their dialogue.\nIf you want to leave the dialogue, just move away from the NPC.\nUse arrow keys or WASD to move around.\nI love you my baby <3\nHave fun playing!\nVersion 1.0";
 
 // Beginner Quest
 const finley1 = "Hiii, I'm Finley!\nHow are you, Poppy? 🌼\nThis place is your little adventure playground! :3\nYou can explore around, find bamboo, or earn some by helping the folks here.\nMight come in handy later... who knows?\nBuuut the bridge is kinda broken.\nIf you bring me some fishies, I can fix it right up for you!\nOh, and if you want to fish, just grab a fishing rod from the little lake over there! 🐠";
@@ -192,6 +192,7 @@ export class NPCData {
         stage: 0,
         action: [() => say("There is a map."),
                 () => {say("You found the map! Bring it to the poststation."); this.npcHandler.addToInventory("Map"); this.npcHandler.stageUpNPCs(["duo", "carte"])},
+                () => say("You found the map! Bring it to the poststation."),
                 () => say("The map is safe."),
         ],
         position: { x: 12, y: 142 }
