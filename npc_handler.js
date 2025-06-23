@@ -10,6 +10,7 @@ export class NPCHandler {
 
     this.inventory = [];
     this.bamboo = 0;
+    this.maxBamboo = 7; // 7
 
     this.loadNPCs();
   }
@@ -49,5 +50,8 @@ export class NPCHandler {
 
   addBamboo() {
     this.bamboo++;
+    if (this.bamboo === this.maxBamboo) {
+      this.addToInventory("Key")
+    }
   }
 }
