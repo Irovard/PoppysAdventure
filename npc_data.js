@@ -44,7 +44,7 @@ function say(message) {
 // Text for NPCs //
 ///////////////////
 
-const press_space1 = "Guide\n----------\nPress SPACE to interact with NPCs and go through their dialogue.\nIf you want to leave the dialogue, just move away from the NPC.\nUse arrow keys or WASD to move around.\nI love you my baby <3\nHave fun playing!\nVersion 1.0";
+const press_space1 = "Guide\n----------\nPress SPACE to interact with NPCs and go through their dialogue.\nIf you want to leave the dialogue, just move away from the NPC.\nUse arrow keys or WASD to move around.\nI love you my baby <3\nHave fun playing!";
 
 // Beginner Quest
 const finley1 = "Hiii, I'm Finley!\nHow are you, Poppy? 🌼\nThis place is your little adventure playground! :3\nYou can explore around, find bamboo, or earn some by helping the folks here.\nMight come in handy later... who knows?\nBuuut the bridge is kinda broken.\nIf you bring me some fishies, I can fix it right up for you!\nOh, and if you want to fish, just grab a fishing rod from the little lake over there! 🐠";
@@ -74,8 +74,9 @@ const cat2 = "Nice. Now I wanna play tho! meowww\nThe game is easy. I hided the 
 const kangaroo1 = "My sweet lil pandaaaa <3333\nI'm so happy that you are here and saved me.\nI was kidnapped and they brought me here.";
 const kangaroo2 = "WHATTT? You did so much just to rescue me?\nThat's- that's so sweet.\nI love you so much, my cute panda!";
 const kangaroo3 = "And also, today is your birthday, right?\nI love you sooooo sooo much and I'm so glad I could be part of two birthdays in your life already.\nYou mean sooo sooo much to me,\nyou're my heaven and when I look at you, I still get butterflies.\nI'm so glad I found you.\nIt is so sweet that you did so much to rescue me!";
-const kangaroo4 = "I wish you just the best for this year and\nthat we will have the best love story ever together <333\nI adore you so much...";
-const kangaroo5 = "FOREVER AND ALWAYS";
+const kangaroo4 = "And also you school is over!\nSo you can finally have time for Spotify Premium (like last year, remember?)\nMaybe you find a month Spotify Premium between Spy Family 9 and 10.";
+const kangaroo5 = "I wish you just the best for this year and\nthat we will have the best love story ever together <333\nI adore you so much...";
+const kangaroo6 = "FOREVER AND ALWAYS";
 
 // Letters
 const letter1 = "My sweet baby,\nI hope you are doing well.\nI wanted to let you know that I am thinking of you and I miss you so much.\nI can't wait to see you again soon.\nI love you <33";
@@ -206,7 +207,7 @@ export class NPCData {
                 () => {say("Fwaeh, seeyuh, I AM MUSIC, Swamp- s- s- s- s- swamp ISSO,\nyeaaahh, huh huh, homicidee homicidee"); this.npcHandler.stageUpNPCs(["carti"])},
                 () => {say("Here ya go, bring it back to my homie."); this.npcHandler.addToInventory("MUSICVocals"); this.npcHandler.stageUpNPCs(["carti", "cat"])},
                 () => say("Here ya go, bring it back to my homie."),
-                () => {say("DIS 1 GOT IT! Thank you homie. Finally I can drop, SORRY 4 DA WAIT. Here ya go wit a bamboo."); this.npcHandler.addBamboo(); this.npcHandler.stageUpNPCs(["carti", "red", "cat"])},
+                () => {say("DIS 1 GOT IT! Thank you homie. Finally I can drop, SORRY 4 DA WAIT.\nHere ya go wit a bamboo."); this.npcHandler.addBamboo(); this.npcHandler.stageUpNPCs(["carti", "red", "cat"])},
                 () => say("You som' FINE SHIT bae")
         ],
         position: { x: 7, y: 83 }
@@ -279,7 +280,8 @@ export class NPCData {
                 () => {say(kangaroo2); this.npcHandler.stageUpNPCs(["kangaroo"])},
                 () => {say(kangaroo3); this.npcHandler.stageUpNPCs(["kangaroo"])},
                 () => {say(kangaroo4); this.npcHandler.stageUpNPCs(["kangaroo"])},
-                () => {say(kangaroo5)}
+                () => {say(kangaroo5); this.npcHandler.stageUpNPCs(["kangaroo"])},
+                () => {say(kangaroo6)}
         ],
         position: { x: 135, y: 136 }
     },
