@@ -12,13 +12,17 @@ export class Player {
     this.img = new Image();
     this.img.src = "./assets/skins/player.png"; // Path to player image
 
-    this.maxFreeze = 200; // Maximum freeze time
+    this.maxSpeed = 8; // Maximum speed 
+    this.speed = { max: this.maxSpeed, timeout: 0 }; // Player movement speed (let max, let timeout)
+
+    this.maxFreeze = 650; // Maximum freeze time
     this.freeze = this.maxFreeze;
     this.snowflakeImg = new Image();
     this.snowflakeImg.src = "./assets/skins/snowflake.png";
   }
 
   freezePlayer() {
+    this.speed.max = 20;
     if (this.freeze > 0) {
       this.freeze--;
     }
@@ -30,6 +34,7 @@ export class Player {
   }
 
   unfreezePlayer() {
+    this.speed.max = this.maxSpeed;
     if (this.freeze < this.maxFreeze) {
       this.freeze++;
     }
@@ -54,18 +59,17 @@ export class Player {
     }
   }
 
-  runPlayer(ctx, canvas) {
+  runPlayer(ctx, canvas, inputKeys) {
+    this.move(inputKeys);
+
     if (onIce(this.x, this.y)) {
       this.freezePlayer();
     }
     else {
       this.unfreezePlayer();
     }
-    console.log(`Player position: (${this.x}, ${this.y}), Freeze: ${this.freeze}`);
+    // console.log(`Player position: (${this.x}, ${this.y}), Freeze: ${this.freeze}`);
     this.drawFreezeIndicator(ctx, canvas);
-
-    
-
   }
 
   setPosition(x, y) {
@@ -85,12 +89,26 @@ export class Player {
     return blockedTiles.includes(tile);
   }
 
-  move(dx, dy) {
+  move(inputKeys) {
+    let dx = 0, dy = 0;
+    if ((inputKeys.has('ArrowUp') || inputKeys.has('w')) && this.speed.timeout === 0) dy = -1;
+    if ((inputKeys.has('ArrowDown') || inputKeys.has('s')) && this.speed.timeout === 0) dy = 1;
+    if ((inputKeys.has('ArrowLeft') || inputKeys.has('a')) && this.speed.timeout === 0) dx = -1;
+    if ((inputKeys.has('ArrowRight') || inputKeys.has('d')) && this.speed.timeout === 0) dx = 1;
+    if (dx !== 0 || dy !== 0) {
+      this.speed.timeout = this.speed.max;
+    }
+
     const newX = Math.max(0, Math.min(this.mapWidth - 1, this.x + dx));
     const newY = Math.max(0, Math.min(this.mapHeight - 1, this.y + dy));
-    if (!this.isBlocked(newX, newY)) {
+    if (!this.isBlocked(newX, this.y)) {
       this.x = newX;
+    }
+    if (!this.isBlocked(this.x, newY)) {
       this.y = newY;
+    }
+    if (this.speed.timeout > 0) {
+      this.speed.timeout--;
     }
   }
 }
