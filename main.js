@@ -66,4 +66,5 @@ class Game {
   }
 }
 
+console.log('Game initialized with tileMap:');
 window.gameInstance = new Game(ctx);

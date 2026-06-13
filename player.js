@@ -42,7 +42,6 @@ export class Player {
     const size = 32; // Size of each snowflake icon
     const padding = 8; // Space between icons
     const y = canvas.height - size - 10; // 10px from bottom
-    console.log(`Drawing ${snowflakes} snowflakes for freeze indicator.`);
 
     for (let i = 0; i < snowflakes; i++) {
       ctx.drawImage(
@@ -53,8 +52,6 @@ export class Player {
         size
       );
     }
-
-    console.log(`Freeze indicator drawn with ${snowflakes} snowflakes.`);
   }
 
   runPlayer(ctx, canvas) {
