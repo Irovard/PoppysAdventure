@@ -12,7 +12,7 @@ export class Player {
     this.img = new Image();
     this.img.src = "./assets/skins/player.png"; // Path to player image
 
-    this.maxSpeed = 8; // Maximum speed 
+    this.maxSpeed = 9; // Maximum speed 
     this.speed = { max: this.maxSpeed, timeout: 0 }; // Player movement speed (let max, let timeout)
 
     this.maxFreeze = 650; // Maximum freeze time

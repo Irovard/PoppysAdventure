@@ -5,13 +5,202 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Poppy's Adventure</title>
   <link rel="icon" type="image/png" href="./assets/skins/player.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
-    body { margin: 0; overflow: hidden; background: #000; }
-    canvas { display: block; image-rendering: pixelated; }
+  *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+  }
+
+  body{
+      width:100vw;
+      height:100vh;
+      overflow:hidden;
+      background:black;
+  }
+
+  #container{
+      width:100%;
+      height:100%;
+      position:relative;
+  }
+
+  /* Tile display */
+  #tileDisplay{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    height: 80vh;
+    width: auto;
+
+    image-rendering: pixelated;
+    display: none;
+  }
+
+  /* Press Space text */
+  #pressSpace{
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%);
+      color:white;
+      font-size:4rem;
+      font-weight:bold;
+      text-align:center;
+      image-rendering:pixelated;
+  }
+
+  /* Menu */
+  #menu{
+      position:absolute;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+  }
+
+  /* Players */
+  .player{
+      position:absolute;
+      height:60vh;
+      image-rendering:pixelated;
+  }
+
+  #playerLeft{
+      left:3%;
+      bottom:20px;
+  }
+
+  #playerMid{
+      top:5px;
+  }
+
+  #playerRight{
+      right:3%;
+      bottom:20px;
+  }
+
+  /* Play button */
+#playButton{
+    position: fixed;
+    bottom: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 18px 70px;
+    font-family: "Press Start 2P", monospace;
+    font-size: 1.4rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #f7d47a;
+    background: linear-gradient(
+        to bottom,
+        #5b3716 0%,
+        #44260e 50%,
+        #2a1609 100%
+    );
+    border: 0;
+    cursor: pointer;
+    image-rendering: pixelated;
+
+    /* Pixel border */
+    box-shadow:
+        /* Gold frame */
+        0 -4px 0 #ffd05a,
+        0 4px 0 #9f6700,
+        -4px 0 0 #c99628,
+        4px 0 0 #c99628,
+        /* Outer corners */
+        -8px -4px 0 #c99628,
+        8px -4px 0 #c99628,
+        -8px 4px 0 #9f6700,
+        8px 4px 0 #9f6700,
+        /* Depth */
+        0 8px 0 #120b05,
+        0 12px 18px rgba(0,0,0,.55);
+    transition: transform .15s steps(2), filter .15s steps(2);
+}
+
+#playButton:hover{
+    transform: translateX(-50%) translateY(-2px);
+    filter: brightness(1.15);
+}
+
+#playButton:active{
+    transform: translateX(-50%) translateY(5px);
+    box-shadow:
+        0 -4px 0 #ffd05a,
+        0 4px 0 #9f6700,
+        -4px 0 0 #c99628,
+        4px 0 0 #c99628,
+        -8px -4px 0 #c99628,
+        8px -4px 0 #c99628,
+        -8px 4px 0 #9f6700,
+        8px 4px 0 #9f6700,
+        0 3px 0 #120b05;
+}
   </style>
 </head>
+
+
 <body>
-  <canvas id="gameCanvas" width="512" height="512"></canvas>
-  <script type="module" src="./main.js"></script>
+  <div id="container">
+      <div id="pressSpace">PRESS SPACE</div>
+      <img id="tileDisplay">
+      <div id="menu">
+          <img id="playerLeft" class="player" src="assets/skins/player.png">
+          <img id="playerMid" class="player" src="assets/npcs/bamboo_holder.png">
+          <button id="playButton">PLAY</button>
+          <img id="playerRight" class="player" src="assets/npcs/kangaroo.png">
+      </div>
+  </div>
+  <script>
+    // Get image filenames from assets/tiles directory
+    const tiles = [
+      "bookshelf",
+      "dark_grass",
+      "dirt",
+      "fire_place",
+      "grass",
+      "grass2",
+      "grass3",
+      "ice",
+      "log",
+      "sand",
+      "smooth_stone",
+      "snow",
+      "stone_bricks",
+      "stone",
+      "tree",
+      "wall",
+      "water",
+      "wood",
+    ]
+
+    const pressSpace = document.getElementById("pressSpace");
+    const tileDisplay = document.getElementById("tileDisplay");
+    const menu = document.getElementById("menu");
+
+
+    document.addEventListener("keydown", async (e) => {
+        if (e.code !== "Space") return;
+        pressSpace.style.display = "none";
+        tileDisplay.style.display = "block";
+
+        // Rapidly show all tiles
+        for(let i = 0; i < tiles.length; i++){
+            tileDisplay.src = "assets/tiles/" + tiles[i] + ".png";
+            await new Promise(resolve =>setTimeout(resolve, 110));
+        }
+        await new Promise(resolve =>setTimeout(resolve, 110));
+        tileDisplay.src = "assets/other/start_bg.png";
+        menu.style.display = "flex";
+    });
+
+    document.getElementById("playButton").addEventListener("click", () => {window.location.href = "game.html";});
+  </script>
+
 </body>
 </html>
