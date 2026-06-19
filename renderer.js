@@ -14,7 +14,7 @@ export class Renderer {
   draw(tileMap, tileSize) {
     const cam = this.camera.getView(this.player, tileSize);
     this.drawMap(tileMap, tileSize, cam);
-    const overDraw = [16]; // Tiles that can are drawn above the player
+    const overDraw = [16, 19]; // Tiles that can are drawn above the player
     if (!overDraw.includes(tileMap[this.player.y][this.player.x])) {
       this.drawPlayers(tileSize, cam);
     }

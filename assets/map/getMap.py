@@ -14,6 +14,16 @@ def get_randomized_value(group):
             return val
     return group[-1]  # fallback
 
+
+# Usage of randomization with Example:
+# randomize_values=[(4, 5, 4, 6)] means:
+# - 50% chance to get 4 (dirt)
+# - 25% chance to get 5 (grass)
+# - 12.5% chance to get 4 (dirt)
+# ...
+
+
+
 def jpg_to_js_array(image_path, output_path, color_map, randomize_values=[]):
     img = Image.open(image_path).convert('RGB')
     width, height = img.size
@@ -64,11 +74,13 @@ if __name__ == "__main__":
         (32, 142, 12): 16,  # tree
         (187, 74, 154): 17, # bookshelf
         (249, 254, 89): 18, # fire_place
+        (255, 0, 255): 19,  # cherry_blossom
+        (100, 50, 0): 20,    # cave
     }
 
     jpg_to_js_array(
         image_path="assets/map/map.png",
         output_path="assets/map/map.js",
         color_map=color_mapping,
-        randomize_values=[(4, 5, 4, 6)]
+        randomize_values=[(4, 5, 4, 6),(20, 20, 20, 21)]
     )
