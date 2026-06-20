@@ -23,6 +23,10 @@ export const tileTypes = {
   19: 'cherry_blossom.png',
   20: 'cave.png',
   21: 'cave2.png',
+  22: 'red_wood.png',
+  23: 'white_log.png',
+  24: 'hay.png',
+  25: 'grass4.png',
 };
 
 // Tile types are mapped to this 2D array.

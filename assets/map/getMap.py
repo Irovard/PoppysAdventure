@@ -75,7 +75,11 @@ if __name__ == "__main__":
         (187, 74, 154): 17, # bookshelf
         (249, 254, 89): 18, # fire_place
         (255, 0, 255): 19,  # cherry_blossom
-        (100, 50, 0): 20,    # cave
+        (100, 50, 0): 20,   # cave
+        (255, 0, 0): 22,    # red_wood
+        (200, 200, 200): 23,# white_log
+        (255, 255, 0): 24,  # hay
+        (0, 255, 0): 25,    # grass4 (with flowers)
     }
 
     jpg_to_js_array(
