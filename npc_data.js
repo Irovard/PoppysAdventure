@@ -98,6 +98,10 @@ export class NPCData {
         this.npcHandler = npcHandler;
     }
 
+    getAllData() {
+        return [...this.getNPCData(), ...this.getLetterData(), ...this.getBambooData()];
+    }
+
     getNPCData() {
     return [
     // Helpers
@@ -237,39 +241,6 @@ export class NPCData {
         ],
         position: { x: 145, y: 53 }
     },
-    // Collectables (Bamboos)
-    {
-        name: 'bamboo1',
-        stage: 0,
-        action: [() => {say("You found a bamboo!"); this.npcHandler.addBamboo(); this.npcHandler.stageUpNPCs(["bamboo1"])},
-                () => say("You already found this bamboo")
-        ],
-        position: { x: 0, y: 38 }
-    },
-    {
-        name: 'bamboo2',
-        stage: 0,
-        action: [() => {say("You found a bamboo!"); this.npcHandler.addBamboo(); this.npcHandler.stageUpNPCs(["bamboo2"])},
-                () => say("You already found this bamboo")
-        ],
-        position: { x: 100, y: 1 }
-    },
-    {
-        name: 'bamboo3',
-        stage: 0,
-        action: [() => {say("You found a bamboo!"); this.npcHandler.addBamboo(); this.npcHandler.stageUpNPCs(["bamboo3"])},
-                () => say("You already found this bamboo")
-        ],
-        position: { x: 71, y: 143 }
-    },
-    {
-        name: 'bamboo4',
-        stage: 0,
-        action: [() => {say("You found a bamboo!"); this.npcHandler.addBamboo(); this.npcHandler.stageUpNPCs(["bamboo4"])},
-                () => say("You already found this bamboo")
-        ],
-        position: { x: 0, y: 150 }
-    },
     // Ending
     {
         name: 'kangaroo',
@@ -282,67 +253,56 @@ export class NPCData {
         ],
         position: { x: 135, y: 136 }
     },
-    // Collectables (Letters)
-    {
-        name: 'letter1',
-        stage: 0,
-        action: [() => say(letter1)],
-        position: { x: 42, y: 2 }
-    },
-    {
-        name: 'letter2',
-        stage: 0,
-        action: [() => say(letter2)],
-        position: { x: 33, y: 143 }
-    },
-    {
-        name: 'letter3',
-        stage: 0,
-        action: [() => say(letter3)],
-        position: { x: 45, y: 55 }
-    },
-    {
-        name: 'letter4',
-        stage: 0,
-        action: [() => say(letter4)],
-        position: { x: 67, y: 11 }
-    },
-    {
-        name: 'letter5',
-        stage: 0,
-        action: [() => say(letter5)],
-        position: { x: 148, y: 2 }
-    },
-    {
-        name: 'letter6',
-        stage: 0,
-        action: [() => say(letter6)],
-        position: { x: 149, y: 19 }
-    },
-    {
-        name: 'letter7',
-        stage: 0,
-        action: [() => say(letter7)],
-        position: { x: 77, y: 93 }
-    },
-    {
-        name: 'letter8',
-        stage: 0,
-        action: [() => say(letter8)],
-        position: { x: 91, y: 147 }
-    },
-    {
-        name: 'letter9',
-        stage: 0,
-        action: [() => say(letter9)],
-        position: { x: 28, y: 110 }
-    },
-    {
-        name: 'letter10',
-        stage: 0,
-        action: [() => say(letter10)],
-        position: { x: 59, y: 133 }
-    },
     ];
+    }
+
+    getBambooData() {
+        const bamboos = [];
+        const positions = [
+            { x: 0, y: 38 },
+            { x: 100, y: 1 },
+            { x: 71, y: 143 },
+            { x: 0, y: 150 },
+        ];
+
+        for (let i=0; i<positions.length; i++) {
+            bamboos.push({
+                name: `bamboo${i + 1}`,
+                stage: 0,
+                action: [() => {say("You found a bamboo!"); this.npcHandler.addBamboo(); this.npcHandler.stageUpNPCs([`bamboo${i + 1}`])},
+                        () => say("You already found this bamboo")],
+                position: positions[i],
+                img: 'bamboo',
+            });
+        }
+        return bamboos;
+    }
+
+    getLetterData() {
+        const letters = [];
+        const positions = [
+            { x: 42, y: 2 },
+            { x: 33, y: 143 },
+            { x: 45, y: 55 },
+            { x: 67, y: 11 },
+            { x: 148, y: 2 },
+            { x: 149, y: 19 },
+            { x: 77, y: 93 },
+            { x: 91, y: 147 },
+            { x: 28, y: 110 },
+            { x: 59, y: 133 },
+        ]
+        const messages = [letter1, letter2, letter3, letter4, letter5, letter6, letter7, letter8, letter9, letter10];
+
+        for (let i=0; i<positions.length; i++) {
+            letters.push({
+                name: `letter${i + 1}`,
+                stage: 0,
+                action: [() => say(messages[i])],
+                position: positions[i],
+                img: 'letter',
+            });
+        }
+        return letters;
     }
 }

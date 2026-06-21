@@ -1,11 +1,15 @@
 export class NPC {
-  constructor(name, stage, action, position) {
+  constructor(name, stage, action, position, img="") {
     this.name = name; // Name of the NPC (str)
     this.stage = stage; // NPC stage (int), index for actions
     this.action = action; // Action of NPC in the stages (array of lambda commands)
     this.position = position; // Starting position of the NPC (object with x and y)
     this.img = new Image();
-    this.img.src = `./assets/npcs/${name}.png`;
+    if (img == "" || img == null) {
+      this.img.src = `./assets/npcs/${name}.png`;
+    } else {
+      this.img.src = `./assets/npcs/${img}.png`;
+    }
   }
 
   nextStage() {

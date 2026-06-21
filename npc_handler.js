@@ -6,7 +6,7 @@ export class NPCHandler {
     this.npcs = {};
     this.blockTiles = [];
     const npcDataClass = new NPCData(this);
-    this.npcData = npcDataClass.getNPCData();
+    this.npcData = npcDataClass.getAllData();
 
     this.inventory = [];
     this.bamboo = 0;
@@ -18,7 +18,7 @@ export class NPCHandler {
 
   loadNPCs() {
     for (const npc of this.npcData) {
-      this.npcs[npc.name] = new NPC(npc.name, npc.stage, npc.action, npc.position);
+      this.npcs[npc.name] = new NPC(npc.name, npc.stage, npc.action, npc.position, npc.img);
       this.blockTiles.push(npc.position);
     }
   }
