@@ -44,7 +44,10 @@ function say(message) {
 // Text for NPCs //
 ///////////////////
 
-const press_space1 = "Guide\n----------\nPress SPACE to interact with NPCs and go through their dialogue.\nIf you want to leave the dialogue, just move away from the NPC.\nUse arrow keys or WASD to move around.\nI love you my baby <3\nHave fun playing!";
+const press_space1 = "Guide\n----------\nPress SPACE to interact with NPCs and go through their dialogue.\nIf you want to leave the dialogue, just move away from the NPC.\nUse arrow keys or WASD to move around.\nDONT reload the site, since the game state will be lost.\nI love you my baby <3\nHave fun playing!";
+
+
+///// PART 1 /////
 
 // Beginner Quest
 const finley1 = "Hiii, I'm Finley!\nHow are you, Poppy? 🌼\nThis place is your little adventure playground! :3\nYou can explore around, find bamboo, or earn some by helping the folks here.\nMight come in handy later... who knows?\nBuuut the bridge is kinda broken.\nIf you bring me some fishies, I can fix it right up for you!\nOh, and if you want to fish, just grab a fishing rod from the little lake over there! 🐠";
@@ -89,6 +92,26 @@ const letter8 = "I write you letters over letters\njust that my lovley words rea
 const letter9 = "Sometimes I feel like the weeknd, bacause\n'Baby I'd die for you'";
 const letter10 = "I'm so addicted to you, your kisses, your touch and your cuddles.\nI can't wait to see you again and get all of them again <333";
 
+
+///// PART 2 /////
+// Beginner Quest
+const maul1 = "Gnnrrr, raaawwwww, never somebody humiliated me like that, *sob*\nI- i just wanted to be powerful T.T";
+const maul2 = "WHAT ARE YOU DOING HERE ?!?!?!\nGo away or you will feel what happens when you misbehave..\nDarth Vader made me look like a beginner\nI will not fail again!";
+const maul3 = "If you can help me?\nI can help myself!\nBut...\nIf you really want to help, bring me my plushie.\nI lost it in this cave and I would feel so much better with it.";
+const maul4 = "VADER!!! IF I CATCH YOU...\nMy brothers didn't die for this..\nYou again???\nOh, you have my phushie???\nYAYYYY, hum humm.\nBUT WAIT. YOU TRAITOR !!\nWHERE IS HIS EAR?";
+const maul5 = "Here you are you little thief!\nOh, you have it? You have the ear?\nI didn't think you would bring it back.\nI still don't trust you, but thank you!\nI cleared up the exit for you.\nLeave and never come back to me and my plushie!!!";
+const winnie1 = "Oh Oh, hello?\nAre you here to rescue me?\nI certainly hope so.\nMaul left me here when he became rather upset.\nI've been trying to think of a way out...\nThink, think, think...\nBut it's difficult on an empty stomach.\nThere isn't a single pot of honey in this place.\nOh, bother!\nWould you please help me get out of here?";
+
+// Cookies
+const cookieMonster1 = "Me want cookie...\nBig cookie. Small cookie. Round cookie. Square cookie.\nAny cookie!\nMe been thinking about cookies all day.\nActually... me think about cookies every day.\nAnd now me tummy making very sad noises.";
+const cookieMonster2 = "Luckily, me hear wonderful rumor.\nDeep within Cherry Blossom Forest, there be little village.\nAnd in that village be bakery.\nAnd in that bakery...\nCOOKIES!\nFresh cookies!\nWarm cookies!\nChocolate chip cookies!\nMe would go myself, but me got distracted looking for cookies.\nThen me got distracted thinking about cookies.\nThen me took nap and dreamed about cookies.";
+const cookieMonster3 = "Please, could you visit bakery and bring me some cookies?\nMe promise to be very grateful.\nWell...\nAt least until me finish eating cookies.\nThen me probably want more cookies.";
+const cookieMonster4 = "COOKIES!!!\nYou actually brought cookies!\nFresh from bakery, too!\nMe haven't seen cookies this beautiful in a very long time.\nThank you, thank you, THANK YOU!\n*nom nom nom*\nOh wow.\nBest cookies ever.\n*nom nom nom*\nWait...\nWhere did the rest go?\nAnyways here a bamboo for your work!";
+const cook1 = "Wel-ball Explorer!\nWhere we ARE? Badoing, in my ball-erkery of course.\nHere you can get every Ball-guette and other pasterie you want.\nYES, also cookies!\nAs you see I know ball.\nActually,\nI am a ball my self. See...\nBoing boing...";
+const cook2 = "Ball damn-it! The cookie ball-ster send you?\nThen, and sorry if its balld, I cant give you cookies!\nThe cookie ball-ster ball-ongs in a psychiatric withdrawal clinic!";
+const cook3 = "Well,\nI don't know which ball shat in the head of the doctor,\nbut okay, here are the cookies!\nBring them to the cookie ball-ster!";
+const doctor1 = "Ball-o, how are you balling?\nWhat .. shushhh he could ball around here.\nWho you ask?\nThe cookie ball-ster sended Fred to ball me up\nif I tell anyone that he cant have cookies.";
+
 /////////////////////
 // Define NPC data //
 /////////////////////
@@ -104,6 +127,86 @@ export class NPCData {
 
     getNPCData() {
     return [
+    //// PART 2 ////
+    // Beginner Quest
+    {
+        name: 'darth_maul',  // Quest Starter
+        stage: 0,
+        action: [() => {say(maul1); this.npcHandler.stageUpNPCs(["darth_maul"])},
+                () => {say(maul2); this.npcHandler.stageUpNPCs(["darth_maul","winnie"])},
+                () => say(maul3),
+                () => {say(maul4); this.npcHandler.stageUpNPCs(["darth_maul","winnie","winnie_ear"])},
+                () => say("BRING ME HIS EAR OR I KILL YOU!!!"),
+                () => {say(maul5); this.npcHandler.addToInventory("Ear"); this.npcHandler.stageUpNPCs(["darth_maul","winnie","winnie_ear"])},
+                () => say("I will destroy you Darth Vader!! Slow and painful.\nThank you for the plushie, Poppy!")],
+        position: { x: 185, y: 111  }
+    },
+    {
+        name: 'winnie',
+        stage: 0,
+        action: [() => say("Oh, brother! Give me a hug \\(o.o)/"),
+                () => {say(winnie1); this.npcHandler.stageUpNPCs(["darth_maul","winnie"])},
+                () => say(winnie1),
+                () => say("Oh, brother, where is my ear???\nAnd where is some honey?\nThink... think... think..."),
+                () => say("I found a lot of honey! It's right infront of me <3")],
+        position: { x: 182, y: 236 }
+    },
+    {
+        name: 'winnie_ear',
+        stage: 0,
+        action: [() => say("..."),
+                () => {say("You found the ear! Bring it back to Maul."); this.npcHandler.stageUpNPCs(["darth_maul","winnie_ear"])},
+                () => say("You found the ear! Bring it back to Maul."),
+                () => say("...")],
+        position: { x: 134, y: 174 }
+    },
+
+    // Cookies
+    {
+        name: 'cookie_monster',  // Quest Starter
+        stage: 0,
+        action: [() => {say(cookieMonster1); this.npcHandler.stageUpNPCs(["cookie_monster"])},
+                () => {say(cookieMonster2); this.npcHandler.stageUpNPCs(["cookie_monster", "cook"])},
+                () => say(cookieMonster3),
+                () => {say(cookieMonster4); this.npcHandler.addBamboo(); this.npcHandler.stageUpNPCs(["cookie_monster","cook", "doctor"])},
+                () => say("Me feel much better now!\nAlthough...\nMe could really go for another cookie.")],
+        position: { x: 132, y: 228 }
+    },
+    {
+        name: 'cook',
+        stage: 0,
+        action: [() => say("Boing boing boing . . ."),
+                () => {say(cook1); this.npcHandler.stageUpNPCs(["cook"])},
+                () => {say(cook2); this.npcHandler.stageUpNPCs(["cook", "doctor"])},
+                () => say("Go to the doctor, who is balling also in this village\nAsk if I can give cookies to the cookie ball-ster!"),
+                () => {say(cook3); this.npcHandler.stageUpNPCs(["cookie_monster","cook"])},
+                () => say(cook3),
+                () => say("You should stay here in the ball-kery, you sweet cutie pie!!")],
+        position: { x: 184, y: 291 }
+    },
+    {
+        name: 'doctor',
+        stage: 0,
+        action: [() => say("Boing boing boing . . ."),
+                () => {say(doctor1); this.npcHandler.stageUpNPCs(["doctor","cook"])},
+                () => say("Go and tell the cook that he should ball some cookies for the cookie ball-ster!"),
+                () => say("Please go away ball-fore Fred the crocodile appears!")],
+        position: { x: 167, y: 273 }
+    },
+
+    // Farm
+    {
+        name: 'farmer',
+        stage: 0,
+        action: [() => say("Boing boing boing . . ."),
+
+        ],
+        position: { x: 53, y: 250 }
+    },
+    
+
+
+    //// PART 1 ////
     // Helpers
     {
         name: 'bamboo_holder',

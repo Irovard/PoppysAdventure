@@ -25,6 +25,7 @@ class Game {
 
     this.bridge = false;
     this.door = false;
+    this.ear = false;
 
     this.loop();
   }
@@ -50,7 +51,7 @@ class Game {
     this.player.runPlayer(this.ctx, canvas, this.input.keys);
 
     if (!this.bridge && this.npcHandler.inventory.includes('Love')) {
-      // Set pixel in tileMap to indicate bridge is built
+      // Set pixel in tileMap to indicate bridge is built (titleMap[y][x])
       this.tileMap[32][30] = 12;
       this.tileMap[31][29] = 12;
       this.bridge = true;
@@ -63,6 +64,11 @@ class Game {
       this.door = true;
     }
 
+    if (!this.ear && this.npcHandler.inventory.includes('Ear')) {
+      this.tileMap[188][98] = 20;
+      this.player.startingPosition = this.player.startingPositionL2;
+      this.ear = true;
+    }
   }
 }
 

@@ -2,7 +2,8 @@ import { onIce } from './tiledata.js';
 
 export class Player {
   constructor(map, npcHandler) {
-    this.startingPosition = { x: 2, y: 1 }; // Default starting position 2,1
+    this.startingPosition = { x: 53, y: 252 };    // Default starting position 2,1
+    this.startingPositionL2 = { x: 97, y: 190 };  // Default starting position for level2 
     this.tileMap = map;
     this.x = this.startingPosition.x;
     this.y = this.startingPosition.y;
