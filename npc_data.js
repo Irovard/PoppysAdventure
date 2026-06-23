@@ -102,7 +102,7 @@ const maul4 = "VADER!!! IF I CATCH YOU...\nMy brothers didn't die for this..\nYo
 const maul5 = "Here you are you little thief!\nOh, you have it? You have the ear?\nI didn't think you would bring it back.\nI still don't trust you, but thank you!\nI cleared up the exit for you.\nLeave and never come back to me and my plushie!!!";
 const winnie1 = "Oh Oh, hello?\nAre you here to rescue me?\nI certainly hope so.\nMaul left me here when he became rather upset.\nI've been trying to think of a way out...\nThink, think, think...\nBut it's difficult on an empty stomach.\nThere isn't a single pot of honey in this place.\nOh, bother!\nWould you please help me get out of here?";
 
-// Cookies
+// Quests
 const cookieMonster1 = "Me want cookie...\nBig cookie. Small cookie. Round cookie. Square cookie.\nAny cookie!\nMe been thinking about cookies all day.\nActually... me think about cookies every day.\nAnd now me tummy making very sad noises.";
 const cookieMonster2 = "Luckily, me hear wonderful rumor.\nDeep within Cherry Blossom Forest, there be little village.\nAnd in that village be bakery.\nAnd in that bakery...\nCOOKIES!\nFresh cookies!\nWarm cookies!\nChocolate chip cookies!\nMe would go myself, but me got distracted looking for cookies.\nThen me got distracted thinking about cookies.\nThen me took nap and dreamed about cookies.";
 const cookieMonster3 = "Please, could you visit bakery and bring me some cookies?\nMe promise to be very grateful.\nWell...\nAt least until me finish eating cookies.\nThen me probably want more cookies.";
@@ -111,6 +111,13 @@ const cook1 = "Wel-ball Explorer!\nWhere we ARE? Badoing, in my ball-erkery of c
 const cook2 = "Ball damn-it! The cookie ball-ster send you?\nThen, and sorry if its balld, I cant give you cookies!\nThe cookie ball-ster ball-ongs in a psychiatric withdrawal clinic!";
 const cook3 = "Well,\nI don't know which ball shat in the head of the doctor,\nbut okay, here are the cookies!\nBring them to the cookie ball-ster!";
 const doctor1 = "Ball-o, how are you balling?\nWhat .. shushhh he could ball around here.\nWho you ask?\nThe cookie ball-ster sended Fred to ball me up\nif I tell anyone that he cant have cookies.";
+const farmer1 = "Howdy lil panda!\nAre you doing kinda good?\nFor a 10.\nDo you have kinda something to do right now?\nFor a 10.\nBecause I could kinda need some help here at my farm.\nFor a 10.";
+const batman1 = "Greetings.\nTell me... are you holding up?\nIf you need the Bat, signal me.\nI'm managing.\nWhy do you ask?\nDo I seem troubled?\nPerhaps.\nI had plans for a pool party.\nBut in my distraction, I forgot to invite anyone.\nNow I find myself alone...\nat my own pool party.";
+const batman2 = "You'd do that and help me?\nThat would mean more than you know.\nThere are two people in particular I hoped would be there.\nCan I trust you to deliver this invitation?";
+const maul6 = "Batman's pool party?\nJoin? Of course I will.\nAnd I can bring someone? Excellent.\nI already know who.\nMy plushie. A loyal companion.\nA silent observer.\nA legend.\nReturn to Batman and tell him this:\nMaul accepts the invitation. And he will arrive with his plushie.";
+const cacaboi1 = "Oho, who is coming there?\nWho I am you ask? Hum Hum HUMBURGUR!\nWhat it must be for a joy, meeting finally the real caca boiii\nYep, thats meEEe.\nOh you want to invite me to the pool party of batman?\nI accept. Usually people don't want shit in their pools,\nso I'm happy he invites me still!";
+const clock1 = "Tiki Tiki my dear panda!\nWe have spectated some paranormalities lately...\nFred somehow was able to summon ghosts!\nWe don't know what his motives are, but it's important to stop him!\nApperantly the ghosts are always arround saltwater.";
+
 
 /////////////////////
 // Define NPC data //
@@ -138,8 +145,12 @@ export class NPCData {
                 () => {say(maul4); this.npcHandler.stageUpNPCs(["darth_maul","winnie","winnie_ear"])},
                 () => say("BRING ME HIS EAR OR I KILL YOU!!!"),
                 () => {say(maul5); this.npcHandler.addToInventory("Ear"); this.npcHandler.stageUpNPCs(["darth_maul","winnie","winnie_ear"])},
-                () => say("I will destroy you Darth Vader!! Slow and painful.\nThank you for the plushie, Poppy!")],
-        position: { x: 185, y: 111  }
+                () => say("I will destroy you Darth Vader!! Slow and painful.\nThank you for the plushie, Poppy!"),
+                () => {say(maul6); this.npcHandler.stageUpNPCs(["darth_maul", "batman"]);},
+                () => say("Go to Batman and tell him: I will come with my plushie."),
+                () => say("I think I lost my plushie at the party...")
+    ],
+        position: { x: 185, y: 111 }
     },
     {
         name: 'winnie',
@@ -160,8 +171,7 @@ export class NPCData {
                 () => say("...")],
         position: { x: 134, y: 174 }
     },
-
-    // Cookies
+    // Quests
     {
         name: 'cookie_monster',  // Quest Starter
         stage: 0,
@@ -193,17 +203,222 @@ export class NPCData {
                 () => say("Please go away ball-fore Fred the crocodile appears!")],
         position: { x: 167, y: 273 }
     },
-
-    // Farm
     {
-        name: 'farmer',
+        name: 'farmer',  // Quest Starter
         stage: 0,
-        action: [() => say("Boing boing boing . . ."),
-
-        ],
+        action: [() => {say(farmer1); this.npcHandler.stageUpNPCs(["farmer","cow1"])},
+                () => say("In the stable which is kinda right behind me there is a cow.\nFor a 10.\nWash it and kinda bring me its milk.\nFor a 10."),
+                () => {say("Nice. thank you so much, this is kinda helping me\nFor a 10.\nAlright, are you kinda ready for your next task?\nFor a 10."); this.npcHandler.stageUpNPCs(["farmer", "fih"])},
+                () => say("Please kinda go and get some fishes at the lake here.\nFor a 10.\nYou kinda have to look for yourself how to get them to me\nFor a 10."),
+                () => {say("Thank you kinda for the fish.\nFor a 10.\nNow there is kinda just one thing left to do.\nFor a 10.\nAnd for your work I'll kinda give you a bamboo.\nFor a 10."); this.npcHandler.stageUpNPCs(["farmer","apple1","apple2","apple3","apple4","apple5"])},
+                () => say("Bring me 5 apples from the forrest on kinda the other side of the lake.\nFor a 10."),
+                () => {say("Wow, you kinda helped me so well!\nFor a 10.\nHere your bamboo and also.."); this.npcHandler.addBamboo(); this.npcHandler.stageUpNPCs(["farmer","cow","fih"])},
+                () => say("Your kinda cool\nFor a 10.")],
         position: { x: 53, y: 250 }
     },
-    
+    {
+        name: 'cow1',
+        stage: 0,
+        action: [() => say("Mooo..."),
+                () => {say("What is this? Mooo\n You also hear it? Mooo\nThis music... Mooo\nIs it possible that soon is..."); this.npcHandler.stageUpNPCs(["cow1"])},
+                () => {say("A NEW MONTH ?????"); this.npcHandler.stageUpNPCs(["cow1"])},
+                () => {say("WAKE UP!!!!\nITS THE FIRST OF THE MONTH\nI brush my teeth and count up\n(slatt slatt slatt slatt)"); this.npcHandler.stageUpNPCs(["cow1"])},
+                () => {say("Farmer: Stop dancing!! It's kinda NOT the first of the month yet...\nFor a 10."); this.npcHandler.stageUpNPCs(["cow1", "farmer"])},
+                () => say("Oh, okay... i-its okay, I will stop.\nAt least my teeth are clean now.\nHere bring the milk to the farmer."),
+                () => say("*whispers* wake up... its the 24th of the month")],
+        position: { x: 53, y: 236 }
+    },
+    {
+        name: 'fih',
+        stage: 0,
+        action: [() => say("Hehehehehe I'm hehehehe a hehe HAHAHAHA ..."),
+                () => {say("Ring Ring\nRing Ring\nRing Ring"); this.npcHandler.stageUpNPCs(["fih"])},
+                () => {say("Whos there?"); this.npcHandler.stageUpNPCs(["fih"])},
+                () => {say("FIH"); this.npcHandler.stageUpNPCs(["fih"])},
+                () => {say("HAHHAHAHHAHHHAHHA\nWhat do you want?\nThat I go to the farmer?\nThat looser he just wants that I do his payment checks."); this.npcHandler.stageUpNPCs(["fih", "farmer"])},
+                () => say("You are kinda fine tho.\n Thats the only reason I allow you to bring me to the farmer!"),
+                () => say("Ring Ring\nFih is calling")],
+        position: { x: 78, y: 238 }
+    },
+    {
+        name: 'apple1',
+        stage: 0,
+        action: [() => say("I'm an appel."),
+                () => {say("Ouuu noo I got found!"); this.npcHandler.addToInventory("apple"); if (this.npcHandler.inventory.filter(x => x === "apple").length === 5) {this.npcHandler.stageUpNPCs(["farmer"]);}; this.npcHandler.stageUpNPCs(["apple1"])},
+                () => say("You already found me sweetie <3")],
+        position: { x: 78, y: 254 },
+        img: 'apple'
+    },
+    {
+        name: 'apple2',
+        stage: 0,
+        action: [() => say("I'm an appel."),
+                () => {say("Ouuu noo I got found!"); this.npcHandler.addToInventory("apple"); if (this.npcHandler.inventory.filter(x => x === "apple").length === 5) {this.npcHandler.stageUpNPCs(["farmer"]);}; this.npcHandler.stageUpNPCs(["apple2"])},
+                () => say("You already found me sweetie <3")],
+        position: { x: 90, y: 247 },
+        img: 'apple'
+    },
+    {
+        name: 'apple3',
+        stage: 0,
+        action: [() => say("I'm an appel."),
+                () => {say("Ouuu noo I got found!"); this.npcHandler.addToInventory("apple"); if (this.npcHandler.inventory.filter(x => x === "apple").length === 5) {this.npcHandler.stageUpNPCs(["farmer"]);}; this.npcHandler.stageUpNPCs(["apple3"])},
+                () => say("You already found me sweetie <3")],
+        position: { x: 87, y: 257 },
+        img: 'apple'
+    },
+    {
+        name: 'apple4',
+        stage: 0,
+        action: [() => say("I'm an appel."),
+                () => {say("Ouuu noo I got found!"); this.npcHandler.addToInventory("apple"); if (this.npcHandler.inventory.filter(x => x === "apple").length === 5) {this.npcHandler.stageUpNPCs(["farmer"]);}; this.npcHandler.stageUpNPCs(["apple4"])},
+                () => say("You already found me sweetie <3")],
+        position: { x: 89, y: 239 },
+        img: 'apple'
+    },
+    {
+        name: 'apple5',
+        stage: 0,
+        action: [() => say("I'm an appel."),
+                () => {say("Ouuu noo I got found!"); this.npcHandler.addToInventory("apple"); if (this.npcHandler.inventory.filter(x => x === "apple").length === 5) {this.npcHandler.stageUpNPCs(["farmer"]);}; this.npcHandler.stageUpNPCs(["apple5"])},
+                () => say("You already found me sweetie <3")],
+        position: { x: 79, y: 226 },
+        img: 'apple'
+    },
+    {
+        name: 'cow2',
+        stage: 0,
+        action: [() => say("Moooo-y lawyer advised moooo-e\nnot to discuss the incident with the flamingo.")],
+        position: { x: 54, y: 242 },
+        img: 'cow2'
+    },
+    {
+        name: 'cow3',
+        stage: 0,
+        action: [() => say("Raccoons keep calling moooo-e the chosen one\nand it's making mooo-e nervous.")],
+        position: { x: 47, y: 239 },
+        img: 'cow2'
+    },
+    {
+        name: 'cow4',
+        stage: 0,
+        action: [() => say("Have you ever though about\nhow many cows you could fit in a shoe\nwith the size of\n2 meters x 1 meter x 1.000.000 meters?")],
+        position: { x: 48, y: 245 },
+        img: 'cow2'
+    },
+    {
+        name: 'batman', // Quest Starter
+        stage: 0,
+        action: [() => {say(batman1); this.npcHandler.stageUpNPCs(["batman"])},
+                () => {say(batman2); this.npcHandler.stageUpNPCs(["batman","darth_maul"])},
+                () => say("Your first destination is Maul.\nGive him this invitation personally.\nHe's a trusted friend.\nInform him that he's free to bring a guest.\nNo further authorization is required."),
+                () => {say("Very great.\nI didn't saw his plushie in years, I thought he lost it.\nNow go and give away my last invitation."); this.npcHandler.stageUpNPCs(["batman","caca_boi"])},
+                () => say("Go west after leaving the island.\nYou'll find a fishing village.\nMy ally is usually at the port. He's a hero.\nGive him this invitation. Tell him Batman requests his presence."),
+                () => {say("Excellent.\nI will no longer be alone in this mansion!\nThank you so much. Here a bamboo for your help."); this.npcHandler.addBamboo(); this.npcHandler.stageUpNPCs(["darth_maul","caca_boi","batman"])},
+                () => say("If you need help someday,\ncall me or cacaboi with the number\n1... 2... 3...")
+            ],
+        position: { x: 101, y: 318 }
+    },
+    {
+        name: 'caca_boi',
+        stage: 0,
+        action: [() => say("The air smells so fresh~"),
+                () => {say(cacaboi1); this.npcHandler.stageUpNPCs(["caca_boi"])},
+                () => {say("Go and tell him I will come.\nAlso I have a new number.\nTell him my new phone number is..."); this.npcHandler.stageUpNPCs(["caca_boi"])},
+                () => {say("1..."); this.npcHandler.stageUpNPCs(["caca_boi"])},
+                () => {say("2..."); this.npcHandler.stageUpNPCs(["caca_boi"])},
+                () => {say("3..."); this.npcHandler.stageUpNPCs(["caca_boi"])},
+                () => {say("4..."); this.npcHandler.stageUpNPCs(["caca_boi"])},
+                () => {say("5..."); this.npcHandler.stageUpNPCs(["caca_boi"])},
+                () => {say("6..."); this.npcHandler.stageUpNPCs(["caca_boi"])},
+                () => {say("7..."); this.npcHandler.stageUpNPCs(["caca_boi","batman"])},
+                () => say("Now go back to batman!"),
+                () => say("Yes oh yes, I do enjoy, that I'm really caca boi!"),
+        ],
+        position: { x: 14, y: 308 }
+    },
+    {
+        name: 'agent1', // Quest Starter
+        stage: 0,
+        action: [() => {say("Aye, ma'am! I'm Agent Yellowski and I work for the\nMagdeburgian Agency for Fred Research and Countermeasures.\nWhat is your issue?\nFred? Thats what I thought."); this.npcHandler.stageUpNPCs(["agent1","agent3"])},
+                () => say("I'm not responsible for spontaneous Fred attacks,\nplease report your issue to Agent Redidi."),
+                () => {say("You have a contract? Great!\nI will sign it and then you can start your assignment.\nHere you go."); this.npcHandler.stageUpNPCs(["agent1","agent3"])},
+                () => say("Go to Agent Redidi,\nhe will tell you more about your assignment and what to do next."),
+                () => {say("Great, you catched the ghosts!\nTo find out why they are arround we have to do some tests."); this.npcHandler.stageUpNPCs(["agent1","agent2"])},
+                () => say("Please go to Agent Greenoble that he can do the tests with the ghosts."),
+                () => {say("Here is your bamboo!\nTy for helping us with the ghosts. But Fred will be back and we need to be prepared for his next attack."); this.npcHandler.addBamboo(); this.npcHandler.stageUpNPCs(["agent1","agent2","agent3","clock"])},
+                () => say("I have no further tasks for you, but maybe Agent Redidi has some more for you.")],
+        position: { x: 60, y: 190 },
+    },
+    {
+        name: 'agent2',
+        stage: 0,
+        action: [() => say("Aye, ma'am! I'm Agent Greenoble and I work for the\nMagdeburgian Agency for Fred Research and Countermeasures.\nPlease talk to Agent Yellowski to get your assignment."),
+                () => {say("Well, you want to help? No problemooo!\nWait, I'm missing some paper for your contract with us."); this.npcHandler.stageUpNPCs(["agent2","agent3"])},
+                () => say("Please go back and ask Agent Redidi for some paper."),
+                () => {say("You got the paper? Great!\nHere is the contract!\nIt still need a signature of Agent Yellowski."); this.npcHandler.stageUpNPCs(["agent2","agent1"])},
+                () => say("Could you give Agent Yellowski the contract?\nHe will sign it and then you can start your assignment."),
+                () => {say("Very fascinating,\nit seems that the ghosts should collect salt for Fred.\nWe recived information that Fred wanted\nto dry all lakes with the saltwater\nto have a monopol on the drinkable water\nand become the world's most powerful being."); this.npcHandler.stageUpNPCs(["agent2","agent3"])},
+                () => say("But you stoped him. Well done!\nPlease go to Agent Redidi and tell him what we found out about the ghosts."),
+                () => say("Well, I don't know what you could do, but maybe ask Agent Yellowski.")],
+        position: { x: 50, y: 188 },
+    },
+    {
+        name: 'agent3',
+        stage: 0,
+        action: [() => say("Aye, ma'am! I'm Agent Redidi working for the\nMagdeburgian Agency for Fred Research and Countermeasures.\nIf you have any concerns about Fred, please report to Agent Greenoble."),
+                () => {say("Yes, here you are at the right location.\nHow can I help you? You want to help and have no concrete issue.\nWell, I can't help you but I know who!"); this.npcHandler.stageUpNPCs(["agent3","agent2"])},
+                () => say("Please talk to Agent Greenoble\nand he will tell you how to help."),
+                () => {say("You need paper? Nothing easier than that! Here you go!"); this.npcHandler.stageUpNPCs(["agent3","agent2"])},
+                () => say("Now you can bring Agent Greenoble some paper."),
+                () => {say("Welcome on board!\nYou are now officially part of the\nMagdeburgian Agency for Fred Research and Countermeasures."); this.npcHandler.stageUpNPCs(["agent3","clock"])},
+                () => say("I don't have the time to talk to you right now,\nbut in one floor there is a grandfathers clock.\nTalk to it and it will tell you what to do."),
+                () => {say("Wow well done!\nAs a reward you recive a bamboo.\nIt should be right here..."); this.npcHandler.stageUpNPCs(["agent3","agent1"]);},
+                () => say("...\nI forgot the bamboo at Agent Yellowski,\ngo to him, and he will give you the bamboo."),
+                () => say("Sorry, right now I'm out of tasks, but I think Agent Greenoble talked about something.")],
+        position: { x: 66, y: 184 },
+    },
+    {
+        name: 'clock',
+        stage: 0,
+        action: [() => say("Tick tock, tick tock, tick tock, tick tock, tick tock,\ntick tock, tick tock, tick tock, tick tock, tick tock, tick tock,\ntick tock, tick tock, tick tock, tick tock,\ntick tock, tick tock, tick tock, tick tock, tick tock, tick tock,\ntick tock, tick tock, tick tock, tick tock, tick tock"),
+                () => {say("Tiki-tiki-tiki\nMa-te-te-ki-ta-ka-ta"); this.npcHandler.stageUpNPCs(["clock"])},
+                () => {say("Tiki.. Tiki.. Tiki, TIKI-TI"); this.npcHandler.stageUpNPCs(["clock"])},
+                () => {say("Bam da da dam dam dadadada\nBam da da da da dadadadam"); this.npcHandler.stageUpNPCs(["clock"])},
+                () => {say(clock1); this.npcHandler.stageUpNPCs(["clock","ghost1","ghost2","ghost3"])},
+                () => say("Here is a device to catch the ghosts.\nFind all 3 ghosts located at the sea, catch them and bring them to me.\nTiki-tiki-tiki\nMa-te-te-ki-ta-ka-ta"),
+                () => {say("Tiki tiki, you catched all the ghosts?\nNice work, the agents will look for you now. And don't forget to tiki-tiki-tiiiii"); this.npcHandler.stageUpNPCs(["clock","agent1"])},
+                () => say("Go to Agent Yellowski.\nTiki-tiki-tiki\nMa-te-te-ki-ta-ka-ta"),
+                () => say("Tiki-tiki-tiki\nMa-te-te-ki-ta-ka-ta\nTiki-tiki-tiki\nMa-te-te-ki-ta-ka-ta")],
+        position: { x: 54, y: 183 },
+    },
+    {
+        name: 'ghost1',
+        stage: 0,
+        action: [() => say("Woooooohhhh, where is my saltwater?"),
+                () => {say("Arrrggg, dooooooh not catch me please!"); this.npcHandler.addToInventory("ghost"); if (this.npcHandler.inventory.filter(x => x === "ghost").length === 3) {this.npcHandler.stageUpNPCs(["clock"]);}; this.npcHandler.stageUpNPCs(["ghost1"])},
+                () => say("You already catched this ghost!")],
+        position: { x: 44, y: 310 },
+        img: 'ghost'
+    },
+    {
+        name: 'ghost2',
+        stage: 0,
+        action: [() => say("IIIIIh neeeehd saltwaterhhh!!!"),
+                () => {say("Arrrggg, dooooooh not catch me please!"); this.npcHandler.addToInventory("ghost"); if (this.npcHandler.inventory.filter(x => x === "ghost").length === 3) {this.npcHandler.stageUpNPCs(["clock"]);}; this.npcHandler.stageUpNPCs(["ghost2"])},
+                () => say("You already catched this ghost!")],
+        position: { x: 93, y: 327 },
+        img: 'ghost'
+    },
+    {
+        name: 'ghost3',
+        stage: 0,
+        action: [() => say("Saltwaterrrrrrhhhhhhhhhhhhh, I neeeeed itttt!!!"),
+                () => {say("Arrrggg, dooooooh not catch me please!"); this.npcHandler.addToInventory("ghost"); if (this.npcHandler.inventory.filter(x => x === "ghost").length === 3) {this.npcHandler.stageUpNPCs(["clock"]);}; this.npcHandler.stageUpNPCs(["ghost3"])},
+                () => say("You already catched this ghost!")],
+        position: { x: 133, y: 294 },
+        img: 'ghost'
+    },
 
 
     //// PART 1 ////

@@ -39,7 +39,6 @@ export class NPCHandler {
       const npc = this.npcs[name];
       if (npc) {
         npc.nextStage();
-        console.log(`NPC ${name} staged up to ${npc.stage}`);
       }
     }
   }
@@ -50,6 +49,7 @@ export class NPCHandler {
 
   addBamboo() {
     this.bamboo++;
+    console.log("Bamboo collected: " + this.bamboo);
     if (this.bamboo === this.maxBamboo) {
       this.addToInventory("Key")
     }
