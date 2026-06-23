@@ -2,7 +2,7 @@ import { onIce } from './tiledata.js';
 
 export class Player {
   constructor(map, npcHandler) {
-    this.startingPosition = { x: 2, y: 1 };    // Default starting position: 2,1
+    this.startingPosition = { x: 6, y: 319 };    // Default starting position: 2,1
     this.startingPositionL2 = { x: 97, y: 190 };  // Default starting position for level2: 97, 190 
     this.tileMap = map;
     this.x = this.startingPosition.x;
@@ -20,6 +20,8 @@ export class Player {
     this.freeze = this.maxFreeze;
     this.snowflakeImg = new Image();
     this.snowflakeImg.src = "./assets/skins/snowflake.png";
+
+    this.blockedTiles = [0, 2, 3, 9, 13, 17, 18, 22, 23, 24];
   }
 
   freezePlayer() {
@@ -85,9 +87,8 @@ export class Player {
     }
 
     // Check for tile
-    const blockedTiles = [0, 2, 3, 9, 13, 17, 18, 22, 23, 24]; // Blocked tiles
     const tile = this.tileMap[y] && this.tileMap[y][x];
-    return blockedTiles.includes(tile);
+    return this.blockedTiles.includes(tile);
   }
 
   move(inputKeys) {

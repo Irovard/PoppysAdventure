@@ -135,6 +135,17 @@ export class NPCData {
     getNPCData() {
     return [
     //// PART 2 ////
+    // Helper
+    {
+        name: 'bamboo_holder2',
+        stage: 0,
+        action: [() => say("Trade a boat here!\n*Collect all bamboos to get a boat*\n*" + this.npcHandler.bamboo + " of " + this.npcHandler.maxBamboo2 + " collected yet*"),
+                () => {say("You have collected all the bamboos!\nYou now have a boat.\nThis means you can walk on water."); this.npcHandler.addToInventory("Boat"); this.npcHandler.stageUpNPCs(["bamboo_holder2"])},
+                () => say("You traded a boat!\nYou can now walk on water!"),
+        ],
+        position: { x: 7, y: 316 },
+        img: 'bamboo_holder'
+    },
     // Beginner Quest
     {
         name: 'darth_maul',  // Quest Starter
@@ -577,10 +588,17 @@ export class NPCData {
     getBambooData() {
         const bamboos = [];
         const positions = [
+            // Part 1
             { x: 0, y: 38 },
             { x: 100, y: 1 },
             { x: 71, y: 143 },
             { x: 0, y: 150 },
+            // Part 2
+            { x: 186, y: 168 },
+            { x: 187, y: 311 },
+            { x: 0, y: 268 },
+            { x: 58, y: 224 },
+            { x: 86, y: 157 }
         ];
 
         for (let i=0; i<positions.length; i++) {

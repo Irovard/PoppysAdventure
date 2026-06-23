@@ -26,6 +26,7 @@ class Game {
     this.bridge = false;
     this.door = false;
     this.ear = false;
+    this.boat = false;
 
     this.loop();
   }
@@ -68,6 +69,11 @@ class Game {
       this.tileMap[188][98] = 20;
       this.player.startingPosition = this.player.startingPositionL2;
       this.ear = true;
+    }
+
+    if (!this.boat && this.npcHandler.inventory.includes('Boat')) {
+      this.player.blockedTiles = this.player.blockedTiles.filter(tile => tile !== 3); // Remove water tile from blocked tiles
+      this.boat = true;
     }
   }
 }

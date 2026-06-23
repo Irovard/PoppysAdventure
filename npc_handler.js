@@ -11,6 +11,7 @@ export class NPCHandler {
     this.inventory = [];
     this.bamboo = 0;
     this.maxBamboo = 7; // 7
+    this.maxBamboo2 = 9 + this.maxBamboo; // 9
 
     this.loadNPCs();
   }
@@ -52,6 +53,9 @@ export class NPCHandler {
     console.log("Bamboo collected: " + this.bamboo);
     if (this.bamboo === this.maxBamboo) {
       this.addToInventory("Key")
+    }
+    if (this.bamboo === this.maxBamboo2) {
+      this.stageUpNPCs(["bamboo_holder2"]);
     }
   }
 }
