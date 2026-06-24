@@ -80,3 +80,20 @@ class Game {
 
 console.log('Game initialized with tileMap:');
 window.gameInstance = new Game(ctx);
+
+
+
+let musicStarted = false;
+
+document.addEventListener("keydown", (event) => {
+    if (event.code === "Space" && !musicStarted) {
+        musicStarted = true;
+
+        const audio = new Audio("assets/audio/background.wav");
+        audio.loop = true;
+        audio.play().catch(err => console.error(err));
+
+        // Optional: keep a global reference so it doesn't get garbage collected
+        window.backgroundMusic = audio;
+    }
+});
