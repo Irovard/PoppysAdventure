@@ -75,10 +75,20 @@ const cat2 = "Nice. Now I wanna play tho! meowww\nThe game is easy. I hided the 
 
 // Kangaroo
 const kangaroo1 = "My sweet lil pandaaaa <3333\nI'm so happy that you are here and saved me.\nI was kidnapped and they brought me here.";
-const kangaroo2 = "WHATTT? You did so much just to rescue me?\nThat's- that's so sweet.\nI love you so much, my cute panda!";
-const kangaroo3 = "And also, today is your birthday, right?\nI love you sooooo sooo much and I'm so glad I could be part of two birthdays in your life already.\nYou mean sooo sooo much to me,\nyou're my heaven and when I look at you, I still get butterflies.\nI'm so glad I found you.\nIt is so sweet that you did so much to rescue me!";
-const kangaroo4 = "I wish you just the best for this year and\nthat we will have the best love story ever together <333\nI adore you so much...";
-const kangaroo5 = "FOREVER AND ALWAYS";
+const kangaroo2 = "WHATTT? You did so much just to rescue me?\nThat's so sweet.\nI love you so much, my cute panda!";
+const kangaroo3 = "If you want you can go into the cave behind me.;"
+const kangaroo4 = "In there you will come to a secret place\nwhere you can help much more people and make them happy,\nlike you make me happy everyday <333";
+const kangaroo5 = "I love you! Have a lot of fun exploring what is waiting behind the cave! Muawwww";
+
+const kangaroo6 = "Yayyyyyyyy <333\nYou finally reached me, my precious panda.\nDid you had fun exploring the world and helping the people living here?\nI got told so many good thing about you!";
+const kangaroo7 = "How nice you where to everybody,\nhow you always offert your help,\nhow wonderful you look like,\nhow happy I am with you...\nOh i think i got carried away here by my own thoughts...";
+const kangaroo8 = "I just cant concentrate when I think of us and our wonderful future together.\nEveryday I'm just thinking about you and how much I want to be close to you\nAnd everyday I call you with glowing eyes and excitement to see you again\nand talk with you <3333";
+const kangaroo9 = "I'm convinced that there is no better couple\nthan us in the entire world and beyond the universe,\nbecause I love you so much and hard and passionate and intensely,\nthat I just know we, my princess, are meant for forever...";
+const kangaroo10 = "FOREVER AND ALWAYS";
+
+// const kangaroo3 = "And also, today is your birthday, right?\nI love you sooooo sooo much and I'm so glad I could be part of two birthdays in your life already.\nYou mean sooo sooo much to me,\nyou're my heaven and when I look at you, I still get butterflies.\nI'm so glad I found you.\nIt is so sweet that you did so much to rescue me!";
+// const kangaroo4 = "I wish you just the best for this year and\nthat we will have the best love story ever together <333\nI adore you so much...";
+// const kangaroo5 = "FOREVER AND ALWAYS";
 
 // Letters
 const letter1 = "My sweet baby,\nI hope you are doing well.\nI wanted to let you know that I am thinking of you and I miss you so much.\nI can't wait to see you again soon.\nI love you <33";
@@ -91,6 +101,17 @@ const letter7 = "You joined into my life and suddenly it all became pretty.\nI h
 const letter8 = "I write you letters over letters\njust that my lovley words reach your lovley thoughts one day\nand make you smile.";
 const letter9 = "Sometimes I feel like the weeknd, bacause\n'Baby I'd die for you'";
 const letter10 = "I'm so addicted to you, your kisses, your touch and your cuddles.\nI can't wait to see you again and get all of them again <333";
+
+const letter11 = "I can't belive it!\nYour mine, just mine and you stay mine forever,\nlike I stay yours forever <3";
+const letter12 = "What would I do without you?\nI dont know, but I dont even want to imagine,\nbecause you are what makes me happy everyday.\nI can't imagine a better support than you in my life";
+const letter13 = "PRINCESSSS\nI miss you <3\nI hope all of those messages arrive because\nI want you to know how much I adore you\nand I want you to see how special you are to me!";
+const letter14 = "Hey, you want to do something fun?\nYou wanna run through the waves with me at Batmans Island,\ntravel to far countrys way behind the sea\nor kiss in the cherry forest\n<3";
+const letter15 = "When I talk about flowers, I think about you\nWhen I talk about sunny days, I think about you\nWhen I talk about ICEs, I think about you\nWhen I talk about cute cats and happiness\nI think about you\nAlways.";
+const letter16 = "I want to go on a date with you!\nAgain and again because\nthe time we spend is the best time I have <333";
+const letter17 = "Kisses!\nMany kisses! All Kisses in the world are in this letter!\nAnd now that you opened it they all fly to you <3\nMUAAWWWWWW MUAAWWWW MUAWWWWWWW\nMUAWWWWWw";
+const letter18 = "I just wanted to write you that I miss you!\nI miss you so much and I really wish you could be with me right noww\nHave a great day my love <33";
+const letter19 = "I never had a favourite color until I met you\nBut when I saw your eyes I knew which one it is\nAnd since then my world was blue and pink\nBlue because of the color and pink because im so in love";
+const letter20 = "You forgot something at my place!\nYou have to go back and get it!\nPls come back to my place.\nI really miss my sweetie girlfriend.";
 
 
 ///// PART 2 /////
@@ -430,6 +451,19 @@ export class NPCData {
         position: { x: 133, y: 294 },
         img: 'ghost'
     },
+    // Ending
+    {
+        name: 'kangaroo2',
+        stage: 0,
+        action: [() => {say(kangaroo6); this.npcHandler.stageUpNPCs(["kangaroo2"])},
+                () => {say(kangaroo7); this.npcHandler.stageUpNPCs(["kangaroo2"])},
+                () => {say(kangaroo8); this.npcHandler.stageUpNPCs(["kangaroo2"])},
+                () => {say(kangaroo9); this.npcHandler.stageUpNPCs(["kangaroo2"])},
+                () => {say(kangaroo10)}
+        ],
+        position: { x: 154, y: 345 },
+        img: 'kangaroo'
+    },
 
 
     //// PART 1 ////
@@ -617,6 +651,7 @@ export class NPCData {
     getLetterData() {
         const letters = [];
         const positions = [
+            // Part 1
             { x: 42, y: 2 },
             { x: 33, y: 143 },
             { x: 45, y: 55 },
@@ -627,8 +662,20 @@ export class NPCData {
             { x: 91, y: 147 },
             { x: 28, y: 110 },
             { x: 59, y: 133 },
+            // Part 2
+            { x: 188, y: 137 },
+            { x: 15 , y: 168 },
+            { x: 6 , y: 222 },
+            { x: 26 , y: 256 },
+            { x: 111 , y: 296 },
+            { x: 46 , y: 305 },
+            { x: 86 , y: 198 },
+            { x: 4 , y: 293 },
+            { x: 10 , y: 355 },
+            { x: 64 , y: 317 },
         ]
-        const messages = [letter1, letter2, letter3, letter4, letter5, letter6, letter7, letter8, letter9, letter10];
+        const messages = [letter1, letter2, letter3, letter4, letter5, letter6, letter7, letter8, letter9, letter10,
+                        letter11, letter12, letter13, letter14, letter15, letter16, letter17, letter18, letter19, letter20];
 
         for (let i=0; i<positions.length; i++) {
             letters.push({
